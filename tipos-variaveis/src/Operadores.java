@@ -1,39 +1,54 @@
-import javax.swing.event.SwingPropertyChangeSupport;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
-public class Operadores {
-    public static void main(String[] args) {
+public class LoginScreen extends JFrame implements ActionListener {
+    private JTextField userField;
+    private JPasswordField passField;
+    private JButton loginButton;
 
-        String nomeUm = "JOAO";
-        String nomeDois = "JOAO";
+    public LoginScreen() {
+        setTitle("Login Screen");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(300, 150);
 
-       System.out.println( nomeUm == nomeDois      );
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(3, 2));
 
+        JLabel userLabel = new JLabel("Username:");
+        userField = new JTextField();
+        JLabel passLabel = new JLabel("Password:");
+        passField = new JPasswordField();
+        loginButton = new JButton("Login");
+
+        loginButton.addActionListener(this);
+
+        panel.add(userLabel);
+        panel.add(userField);
+        panel.add(passLabel);
+        panel.add(passField);
+        panel.add(loginButton);
+
+        add(panel);
+        setVisible(true);
     }
 
+    public void actionPerformed(ActionEvent e) {
+        String username = userField.getText();
+        String password = String.valueOf(passField.getPassword());
 
-
-        int numero1 = 1;
-        int numero2 = 2;
-        
-        boolean simNao = numero1 == numero2;
-        if(numero1 < numero2){
-            System.out.println("a nossa condição é verdadeira");
-
+        if (username.equals("admin") && password.equals("admin123")) {
+            JOptionPane.showMessageDialog(this, "Login successful");
+            dispose();
+            // Code to open the main application window
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid username or password");
         }
-
-        System.out.println("numeroUm é igual a numeroDois? " + simNao);
- 
-        simNao = numero1 == numero2;
-
-        System.out.println("numeroUm é diferente a numeroDois? " + simNao);
- 
-        simNao = numero1 == numero2;
-
-        System.out.println("numeroUm é maior que numeroDois? " + simNao);
- 
-
     }
-    
+
+    public static void main(String[] args) {
+        new LoginScreen();
     }
+}
     
 
